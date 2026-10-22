@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Султанова Эвелина | Java Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --card-border: #1f2937;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --badge-bg: rgba(56, 189, 248, 0.1);
+      --badge-border: rgba(56, 189, 248, 0.25);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header Profile */
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .profile-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .profile-role {
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .profile-location {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      font-size: 0.92rem;
+    }
+
+    .contact-link {
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .btn-download {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #0b0f19;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.15s ease, opacity 0.2s;
+    }
+
+    .btn-download:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Sections */
+    section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      padding: 16px;
+      border-radius: 10px;
+    }
+
+    .skill-card h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 4px 8px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: #7dd3fc;
+      border-radius: 6px;
+    }
+
+    /* Projects */
+    .project-item {
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .project-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .project-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .project-tech {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+    }
+
+    .project-meta {
+      display: inline-block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .project-features {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .project-features li {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .project-features li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .repo-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Education */
+    .education-item {
+      margin-bottom: 14px;
+    }
+
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .edu-dates {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .edu-faculty {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .courses-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .courses-box strong {
+      color: var(--text);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 20px 0;
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 20px 12px; }
+      header, section { padding: 24px 18px; }
+      .profile-title { font-size: 1.7rem; }
+      .edu-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header / Контакты -->
+    <header>
+      <h1 class="profile-title">Султанова Эвелина</h1>
+      <div class="profile-role">Java Backend Developer</div>
+      <div class="profile-location">📍 Санкт-Петербург, Россия</div>
+
+      <div class="contacts">
+        <a class="contact-link" href="mailto:evelinasultan@mail.ru">
+          ✉️ evelinasultan@mail.ru
+        </a>
+        <a class="contact-link" href="tel:+79124384500">
+          📞 +7 (912) 438-45-00
+        </a>
+        <a class="contact-link" href="https://github.com/E-v-e-l-i-n-e" target="_blank" rel="noopener noreferrer">
+          💻 github.com/E-v-e-l-i-n-e
+        </a>
+        <a class="contact-link" href="https://t.me/chebuchelli" target="_blank" rel="noopener noreferrer">
+          ✈️ @chebuchelli
+        </a>
+      </div>
+
+      <a href="CV.pdf" class="btn-download" download>
+        📄 Скачать PDF резюме
+      </a>
+    </header>
+
+    <!-- Стек и навыки -->
+    <section>
+      <h2 class="section-title">Навыки & Стек</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Языки</h3>
+          <ul class="tags">
+            <li class="tag">Java</li>
+            <li class="tag">Python</li>
+            <li class="tag">SQL</li>
+            <li class="tag">JavaScript</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Фреймворки</h3>
+          <ul class="tags">
+            <li class="tag">Java Spring</li>
+            <li class="tag">Spring Boot</li>
+            <li class="tag">Jakarta EE</li>
+            <li class="tag">React</li>
+            <li class="tag">Angular</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Инструменты & БД</h3>
+          <ul class="tags">
+            <li class="tag">PostgreSQL</li>
+            <li class="tag">Docker</li>
+            <li class="tag">docker-compose</li>
+            <li class="tag">Git / GitHub</li>
+            <li class="tag">REST API</li>
+            <li class="tag">OpenAPI</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h3>Дополнительно</h3>
+          <ul class="tags">
+            <li class="tag">JWT / RBAC</li>
+            <li class="tag">MinIO</li>
+            <li class="tag">WebSocket</li>
+            <li class="tag">English B2</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Проекты -->
+    <section>
+      <h2 class="section-title">Проекты</h2>
+
+      <!-- Проект 1 -->
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-title">Платформа для создания и прохождения тестов</div>
+          <div class="project-tech">Spring Boot • React • PostgreSQL</div>
+        </div>
+        <div class="project-meta">Веб-приложение с системой тестирования и расчета результатов</div>
+        <ul class="project-features">
+          <li>Реализация клиентской части на React и серверной части на Spring Boot.</li>
+          <li>Проектирование схемы БД PostgreSQL для данных о пользователях, группах, тестах и истории прохождения.</li>
+          <li>Разработка REST API, внедрение механизмов аутентификации и авторизации через JWT-токены.</li>
+          <li>Разграничение прав доступа Role-Based Access Control (RBAC) и расчет результатов.</li>
+        </ul>
+        <a class="repo-link" href="https://github.com/E-v-e-l-i-n-e" target="_blank" rel="noopener noreferrer">
+          → GitHub Repository
+        </a>
+      </div>
+
+      <!-- Проект 2 -->
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-title">Информационная система для управления коллекцией персонажей</div>
+          <div class="project-tech">Jakarta EE • Spring Boot • React</div>
+        </div>
+        <div class="project-meta">Веб-приложение для интерактивного управления коллекцией объектов</div>
+        <ul class="project-features">
+          <li>Разработка REST API, авторизация/аутентификация с JWT и Role-Based Access Control.</li>
+          <li>Интеграция стороннего объектного хранилища MinIO для медиафайлов.</li>
+          <li>Асинхронный обмен данными в реальном времени через WebSocket.</li>
+          <li>Реализация распределенных и двухфазных транзакций для контроля целостности данных.</li>
+          <li>Серверная и клиентская фильтрация и сортировка данных.</li>
+        </ul>
+        <a class="repo-link" href="https://github.com/E-v-e-l-i-n-e" target="_blank" rel="noopener noreferrer">
+          → GitHub Repository
+        </a>
+      </div>
+
+      <!-- Проект 3 -->
+      <div class="project-item">
+        <div class="project-header">
+          <div class="project-title">Веб-приложение для управления коллекцией музыкальных групп</div>
+          <div class="project-tech">Spring Boot • React • SOA</div>
+        </div>
+        <div class="project-meta">Веб-приложение с сервис-ориентированной архитектурой (Main / Grammy)</div>
+        <ul class="project-features">
+          <li>Реализация серверных микросервисов на Spring Boot и клиентской части на React.</li>
+          <li>Настройка взаимодействия через защищенный канал с самоподписанным SSL-сертификатом.</li>
+          <li>Поддержка комплексной фильтрации, сортировки и постраничной пагинации.</li>
+        </ul>
+        <a class="repo-link" href="https://github.com/E-v-e-l-i-n-e" target="_blank" rel="noopener noreferrer">
+          → GitHub Repository
+        </a>
+      </div>
+    </section>
+
+    <!-- Образование -->
+    <section>
+      <h2 class="section-title">Образование</h2>
+      <div class="education-item">
+        <div class="edu-header">
+          <span>Университет ИТМО</span>
+          <span class="edu-dates">Сентябрь 2022 — Август 2026</span>
+        </div>
+        <div class="edu-faculty">
+          Факультет программной инженерии и компьютерной техники (ПИиКТ)
+        </div>
+        <div class="courses-box">
+          <strong>Ключевые дисциплины:</strong> Информационные системы, Программирование, Операционные системы, Базы данных, Веб-программирование, Компьютерные сети, Бизнес-логика программных систем, Распределенные системы хранения данных.
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
